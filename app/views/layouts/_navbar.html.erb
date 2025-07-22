@@ -1,7 +1,28 @@
-<% if user_signed_in? %>
-  Logged in as <%= current_user.email %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to "Login", new_user_session_path %>
-  <%= link_to "Register", new_user_registration_path %>
-<% end %>
+<nav class="navbar navbar-expand-lg mavbar-dark bg-dark">
+  <div class="container-fluid">
+    <%= link_to "Focus Board", root_path, class:"navbar-brand text-white" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+          <li class="nav-item d-flex align-items-center me-2 text-white">
+            Logged in as <%= current_user.email %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"nav-link text-white" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class:"nav-link text-white" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Register", new_user_registration_path, class:"nav-link text-white" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<%#=%>
