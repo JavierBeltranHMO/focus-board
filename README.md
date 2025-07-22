@@ -1,24 +1,59 @@
-# README
+## 🎯 Focus Board — Trello Clone with Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Focus Board is a full-stack Trello clone built with Ruby on Rails and PostgreSQL.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## ✅ Implemented Features
 
-* System dependencies
+- Reorderable task lists
+- Drag & drop tasks between lists
 
-* Configuration
+---
 
-* Database creation
+## 🧩 Planned Features
 
-* Database initialization
+### 🧑‍💼 Authentication & Accounts
 
-* How to run the test suite
+- [ ] User registration and login with Devise
+- [ ] Associate boards with users
+- [ ] Restrict access to user-owned boards
 
-* Services (job queues, cache servers, search engines, etc.)
+### 🧠 Boards
 
-* Deployment instructions
+- [ ] Create multiple boards
+- [ ] Share boards with other users (collaboration)
+- [ ] Mark boards as favorites
 
-* ...
+### ✅ Tasks
+
+- [ ] Add task descriptions
+- [ ] Set task deadlines
+- [ ] Mark tasks as completed
+- [ ] Add comments to tasks
+- [ ] Attach files to tasks (via ActiveStorage)
+
+### 📋 Lists
+
+- [ ] Rename lists
+- [ ] Delete lists
+
+### 🎨 UI/UX Improvements
+
+- [ ] Responsive design for mobile
+- [ ] Light/Dark theme toggle
+- [ ] Deletion confirmations
+
+### 🔄 Collaboration & Activity
+
+- [ ] View recent board activity (audit log)
+
+### 🔍 Extras
+
+- [ ] Search/filter tasks by name or status
+- [ ] Visual task priority (high/medium/low)
+- [ ] Checklist/subtasks within tasks
+
+---
+
+Stay tuned as more features are added!
