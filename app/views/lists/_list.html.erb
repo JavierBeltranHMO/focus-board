@@ -1,7 +1,12 @@
 <div id="<%= dom_id list %>">
   <p>
-    <strong>Name:</strong>
-    <%= list.name %>
+    <strong><%= list.name %></strong>
   </p>
-
 </div>
+<ul>
+  <% list.tasks.each do |task| %>
+    <li>
+      <%= render task%>
+    </li>
+  <% end %>
+</ul>
