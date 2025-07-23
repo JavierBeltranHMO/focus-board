@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :boards
-
-  resources :tasks do
-    member do
-      put :sort
+  resources :boards do
+    resources :lists, except: [ :index, :show ] do
+      member do
+        put :sort
+      end
     end
   end
 
-  resources :lists do
+  resources :tasks do
     member do
       put :sort
     end

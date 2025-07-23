@@ -1,9 +1,11 @@
 class ListsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_board
   before_action :set_list, only: %i[ show edit update destroy ]
 
   # GET /lists or /lists.json
   def index
-    @lists = List.rank(:row_order)
+    @lists = @board.lists.rank(:row_order)
   end
 
   def sort
@@ -18,7 +20,7 @@ class ListsController < ApplicationController
 
   # GET /lists/new
   def new
-    @list = List.new
+    @list = @board.lists.new
   end
 
   # GET /lists/1/edit
@@ -27,50 +29,43 @@ class ListsController < ApplicationController
 
   # POST /lists or /lists.json
   def create
-    @list = List.new(list_params)
+    @list = @board.lists.new(list_params)
 
-    respond_to do |format|
       if @list.save
-        format.html { redirect_to @list, notice: "List was successfully created." }
-        format.json { render :show, status: :created, location: @list }
+        redirect_to @board, notice: "List was successfully created."
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @list.errors, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
-    end
   end
 
   # PATCH/PUT /lists/1 or /lists/1.json
   def update
-    respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: "List was successfully updated." }
-        format.json { render :show, status: :ok, location: @list }
+        redirect_to @board, notice: "List was successfully updated."
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @list.errors, status: :unprocessable_entity }
+         render :edit, status: :unprocessable_entity
       end
-    end
   end
 
   # DELETE /lists/1 or /lists/1.json
   def destroy
     @list.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to lists_path, status: :see_other, notice: "List was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to @board, status: :see_other, notice: "List was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def set_board
+      @board=current_user.boards.friendly.find(params[:board_id])
+    end
+
     def set_list
-      @list = List.find(params.expect(:id))
+      @list = @board.lists.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def list_params
-      params.expect(list: [ :name ])
+      params.require(:list).permit(:name)
     end
 end

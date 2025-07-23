@@ -1,4 +1,12 @@
-<h1><%= @board.name %>    </h1>
+<h1><%= @board.name %></h1>
+<div id="lists" class="d-flex gap-3 overflow-auto p-3" data-controller="sortable">
+  <% @board.lists.each do |list| %>
+    <div data-sortable-update-url="<%= sort_board_list_path(@board, list) %>">
+      <%= render list %>
+    </div>
+  <% end %>
+</div>
+<%= link_to "New List", new_board_list_path(@board), class: "btn btn-primary mt-3" %>
 <%= link_to "Back to Boards", boards_path, class:"btn btn-secondary ms-2" %>
 <%= link_to "Edit", edit_board_path(@board), class:"btn btn-warning me-2" %>
 <%= button_to "Delete", board_path(@board), method: :delete, data:{turbo_confirm:"Are you sure"}, class:"btn btn-danger mt-2 ms-2" %>

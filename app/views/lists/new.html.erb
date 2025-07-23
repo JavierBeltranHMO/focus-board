@@ -1,11 +1,5 @@
 <% content_for :title, "New list" %>
-
 <h1>New list</h1>
-
 <%= render "form", list: @list %>
-
+<%= link_to "Back to board", board_path(@board) %>
 <br>
-
-<div>
-  <%= link_to "Back to lists", lists_path %>
-</div>
