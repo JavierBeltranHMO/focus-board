@@ -34,6 +34,8 @@ class ListsController < ApplicationController
     @list = @board.lists.new(list_params)
 
       if @list.save
+        @list.tasks.each { |t| puts "#{t.id}: #{t.name}" }
+
         redirect_to @board, notice: "List was successfully created."
       else
         render :new, status: :unprocessable_entity
@@ -43,6 +45,8 @@ class ListsController < ApplicationController
   # PATCH/PUT /lists/1 or /lists/1.json
   def update
       if @list.update(list_params)
+        @list.tasks.each { |t| puts "#{t.id}: #{t.name}" }
+
         redirect_to @board, notice: "List was successfully updated."
       else
          render :edit, status: :unprocessable_entity
@@ -68,6 +72,6 @@ class ListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def list_params
-      params.require(:list).permit(:name)
+      params.require(:list).permit(:name, tasks_attributes: [ :id, :name, :_destroy ])
     end
 end
