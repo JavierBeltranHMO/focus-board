@@ -16,7 +16,7 @@ class BoardsController < ApplicationController
   def create
     @board=current_user.boards.new(board_params)
     if @board.save
-      redirect to @board, notice: "Board created successfully."
+      redirect_to @board, notice: "Board created successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,4 +26,5 @@ class BoardsController < ApplicationController
 
   def board_params
     params.require(:board).permit(:name)
+  end
 end
