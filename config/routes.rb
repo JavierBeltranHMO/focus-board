@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "boards/index"
+  get "boards/show"
+  get "boards/new"
+  get "boards/create"
   devise_for :users
   resources :tasks do
     member do
@@ -11,6 +15,8 @@ Rails.application.routes.draw do
       put :sort
     end
   end
+
+  resources :boards
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
