@@ -1,7 +1,7 @@
 class Board < ApplicationRecord
   validates :name, presence: true
   belongs_to :user
-  has_many :lists, dependent: :destroy
+  has_many :lists, -> { rank(:row_order) }, dependent: :destroy
 
   extend FriendlyId
   friendly_id :name, use: :slugged
