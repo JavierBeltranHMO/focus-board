@@ -36,6 +36,7 @@ class BoardsController < ApplicationController
   end
 
   def destroy
+    puts "we working"
     @board.destroy
     redirect_to boards_path, notice: "Board deleted succesfully."
   end

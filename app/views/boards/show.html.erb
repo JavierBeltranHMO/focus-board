@@ -1,6 +1,4 @@
 <h1><%= @board.name %>    </h1>
 <%= link_to "Back to Boards", boards_path, class:"btn btn-secondary ms-2" %>
 <%= link_to "Edit", edit_board_path(@board), class:"btn btn-warning me-2" %>
-<%= form_with url: board_path(@board), method: :delete, data:{confirm: "Are you sure?"}, local: true do %>
-  <%= submit_tag "Delete", class:"btn btn-danger" %>
-<% end %>
+<%= button_to "Delete", board_path(@board), method: :delete, data:{turbo_confirm:"Are you sure"}, class:"btn btn-danger mt-2 ms-2" %>
