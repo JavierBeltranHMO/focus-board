@@ -1,12 +1,25 @@
-<div id="<%= dom_id list %>" class="list bg-light border rounded p-3">
-  <p>
+<div id="<%= dom_id list %>" class="list bg-light border rounded p-3 d-flex flex-column">
+  <div class="d-flex justify-content-between align-items-start mb-2 position-relative">
     <strong><%= list.name %></strong>
-    <%= list.row_order%>
-  </p>
-  <ul data-controller="sortable" data-sortable-group-value="tasks" data-sortable-list-id="<%= list.id %>">
+    <div class="dropdown">
+      <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="listMenu<%= list.id %>" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-three-dots-vertical"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="listMenu<%= list.id %>"
+          style="z-index: 2000">
+        <li><%= link_to "Edit", edit_board_list_path(@board, list), class: "dropdown-item" %></li>
+        <li><%= button_to "Delete", board_list_path(@board, list), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this list?" }, class: "dropdown-item text-danger" %></li>
+      </ul>
+    </div>
+  </div>
+  <ul data-controller="sortable"
+      data-sortable-group-value="tasks"
+      data-sortable-list-id="<%= list.id %>"
+      class="flex-grow-1 overflow-auto">
     <% list.tasks.rank(:row_order).each do |task| %>
       <li data-sortable-update-url="<%= sort_task_path(task) %>" class="bg-white border rounded px-2 py-1 mb-2 shadow-sm">
-        <%= render task%>
+        <%= render task %>
       </li>
     <% end %>
   </ul>

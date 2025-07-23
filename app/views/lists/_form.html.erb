@@ -14,6 +14,15 @@
     <%= form.text_field :name %>
   </div>
   <div>
+    <h5>New Tasks</h5>
+    <%= form.fields_for :tasks do |task_fields| %>
+      <div class="mb-2">
+        <%= task_fields.label :name, "Task Title", style:"display: block" %>
+        <%= task_fields.text_field :name, class:"form-control" %>
+      </div>
+    <% end %>
+  </div>
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

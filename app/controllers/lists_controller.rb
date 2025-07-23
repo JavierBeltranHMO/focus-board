@@ -21,10 +21,12 @@ class ListsController < ApplicationController
   # GET /lists/new
   def new
     @list = @board.lists.new
+    @list.tasks.build
   end
 
   # GET /lists/1/edit
   def edit
+      @list.tasks.build if @list.tasks.empty?
   end
 
   # POST /lists or /lists.json
