@@ -7,7 +7,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board= current_user.boards.find(params[:id])
+    @board= current_user.boards.friendly.find(params[:id])
     redirect_to boards_path, alert: "Board not found." unless @board
   end
 
@@ -44,7 +44,7 @@ class BoardsController < ApplicationController
   private
 
   def set_board
-    @board=current_user.boards.find(params[:id])
+    @board=current_user.boards.friendly.find(params[:id])
   end
 
   def board_params
