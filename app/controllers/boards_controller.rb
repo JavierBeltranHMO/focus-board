@@ -1,12 +1,13 @@
 class BoardsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [ :index ]
 
   def index
-    @boards=current_user.boards
+    @boards= user_signed_in? ? current_user.boards : []
   end
 
   def show
     @board= current_user.boards.find(params[:id])
+    redirect_to boards_path, alert: "Board not found." unless @board
   end
 
   def new
