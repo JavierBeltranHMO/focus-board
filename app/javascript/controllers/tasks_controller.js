@@ -16,7 +16,9 @@ export default class extends Controller {
 
   removeTask(event) {
     event.preventDefault();
-    const taskItem = event.target.closest(".nested-task");
+    const taskItem =
+      event.target.closest(".nested-task") ||
+      event.target.closest(".task-item");
     if (taskItem) {
       const destroyField = taskItem.querySelector('input[name*="_destroy"]');
       if (destroyField) {
@@ -25,6 +27,15 @@ export default class extends Controller {
       } else {
         taskItem.remove();
       }
+    }
+  }
+
+  markComplete(event) {
+    event.preventDefault();
+    const taskItem = event.target.closest(".task-item");
+    if (taskItem) {
+      taskItem.classList.toggle("text-decoration-line-through");
+      taskItem.classList.toggle("opacity-50");
     }
   }
 }
