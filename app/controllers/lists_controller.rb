@@ -21,7 +21,7 @@ class ListsController < ApplicationController
   # GET /lists/new
   def new
     @list = @board.lists.new
-    @list.tasks.build
+    1.times { @list.tasks.build }
   end
 
   # GET /lists/1/edit
