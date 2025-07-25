@@ -33,11 +33,12 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @list=List.friendly.find(params[:list_id])
+    @task = @list.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
+        format.html { redirect_to board_path(@list.board), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -73,11 +74,11 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.friendly.find(params.expect(:id))
+      @task = Task.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.expect(task: [ :name, :list_id ])
+      params.require(:task).permit(:name, :description, :list_id)
     end
 end

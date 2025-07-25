@@ -6,10 +6,11 @@ Rails.application.routes.draw do
       member do
         put :sort
       end
+      resources :tasks, only: [ :create ]
     end
   end
 
-  resources :tasks do
+  resources :tasks, only: [ :edit, :update, :destroy, :show ] do
     member do
       put :sort
       patch :complete
