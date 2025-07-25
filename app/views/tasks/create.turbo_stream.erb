@@ -1,0 +1,2 @@
+<%= turbo_stream.append "list-#{@task.list_id}-tasks", partial: "tasks/task", locals:{task:@task} %>
+<%= turbo_stream.replace "new-task-modal", "" %>

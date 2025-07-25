@@ -33,6 +33,8 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
+    puts "LIST ID PARAM: #{params[:list_id]}"
+
     @list=List.friendly.find(params[:list_id])
     @task = @list.tasks.new(task_params)
 

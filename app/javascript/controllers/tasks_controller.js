@@ -2,34 +2,9 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["container", "template", "modal", "listIdField"];
+  static targets = ["modal", "listIdField"];
   static values = { listId: Number };
   // connect() {}
-
-  add(event) {
-    event.preventDefault();
-    const content = this.templateTarget.innerHTML.replace(
-      /NEW_TASK/g,
-      new Date().getTime()
-    );
-    this.containerTarget.insertAdjacentHTML("beforeend", content);
-  }
-
-  removeTask(event) {
-    event.preventDefault();
-    const taskItem =
-      event.target.closest(".nested-task") ||
-      event.target.closest(".task-item");
-    if (taskItem) {
-      const destroyField = taskItem.querySelector('input[name*="_destroy"]');
-      if (destroyField) {
-        destroyField.value = "1";
-        taskItem.style.display = "none";
-      } else {
-        taskItem.remove();
-      }
-    }
-  }
 
   markComplete(event) {
     event.preventDefault();
@@ -41,16 +16,29 @@ export default class extends Controller {
   }
 
   modal(event) {
-    console.log("nope");
-    const listId = event.currentTarget.dataset.taskListIdValue;
-    this.listIdFieldTarget.value = listId;
-    const modal = new bootstrap.Modal(this.modalTarget);
-    modal.show();
+    console.log("yesnt");
+    const listSlug = event.currentTarget.dataset.taskListSlugValue;
+    const modalEl = document.getElementById("new-task-modal");
+    const listIdField = modalEl.querySelector(
+      '[data-tasks-target="listIdField"]'
+    );
+    const form = modalEl.querySelector("form");
+    const boardSlug = modalEl.dataset.boardSlug;
 
-    const form = this.modalTarget.querySelector("form");
-    const boardId = this.modalTarget.dataset.boardId;
-    if (form && boardId && listId) {
-      form.action = `/boards/${boardId}/lists/${listId}/tasks`;
+    listIdField.value = listSlug;
+    form.action = `/boards/${boardSlug}/lists/${listSlug}/tasks`;
+
+    const modal = new bootstrap.Modal(modalEl);
+    modal.show();
+  }
+
+  resetModal(event) {
+    debugger;
+    console.log("nopent");
+    console.log("event.detail", event.detail);
+    if (event.detail.success) {
+      bootstrap.Modal.getInstance(modalEl)?.hide();
+      modalEl.querySelector("form").reset();
     }
   }
 }

@@ -1,5 +1,5 @@
 <h1><%= @board.name %></h1>
-<div id="lists" class="d-flex gap-3 overflow-auto p-3" data-controller="sortable">
+<div id="lists" class="d-flex gap-3 overflow-auto p-3" data-controller="sortable tasks">
   <% @board.lists.each do |list| %>
     <div data-sortable-update-url="<%= sort_board_list_path(@board, list) %>">
       <%= render list %>
@@ -10,3 +10,33 @@
 <%= link_to "Back to Boards", boards_path, class:"btn btn-secondary ms-2" %>
 <%= link_to "Edit", edit_board_path(@board), class:"btn btn-warning me-2" %>
 <%= button_to "Delete", board_path(@board), method: :delete, data:{turbo_confirm:"Are you sure"}, class:"btn btn-danger mt-2 ms-2" %>
+<%# tasks modal %>
+<div id="new-task-modal" class="modal fade" tabindex="-1" role="dialog"
+     data-tasks-target="modal"
+     data-board-slug="<%= @board.slug %>">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_with url: board_list_tasks_path(@board, 0), scope: :task, data: { turbo_frame: "_top", controller:"tasks", action: "turbo:submit-end->tasks#resetModal"}, local: true do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title">New Task</h5>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= f.hidden_field :list_id, data: { tasks_target: "listIdField" } %>
+          <div class="mb-3">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :description %>
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Create Task", class: "btn btn-primary" %>
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
