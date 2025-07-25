@@ -16,7 +16,6 @@ export default class extends Controller {
   }
 
   modal(event) {
-    console.log("yesnt");
     const listSlug = event.currentTarget.dataset.taskListSlugValue;
     const modalEl = document.getElementById("new-task-modal");
     const listIdField = modalEl.querySelector(
@@ -33,9 +32,7 @@ export default class extends Controller {
   }
 
   resetModal(event) {
-    debugger;
-    console.log("nopent");
-    console.log("event.detail", event.detail);
+    const modalEl = document.getElementById("new-task-modal");
     if (event.detail.success) {
       bootstrap.Modal.getInstance(modalEl)?.hide();
       modalEl.querySelector("form").reset();
