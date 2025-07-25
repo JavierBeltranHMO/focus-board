@@ -7,13 +7,13 @@ class TasksController < ApplicationController
   end
 
   def sort
-      @task=Task.find(params[:id])
+      @task=Task.friendly.find(params[:id])
       @task.update(row_order_position: params[:row_order_position], list_id: params[:list_id])
       head :no_content
   end
 
   def complete
-    @task=Task.find(params[:id])
+    @task=Task.friendly.find(params[:id])
     @task.update(completed: !@task.completed)
     redirect_back fallback_location: request.referer
   end
@@ -61,7 +61,7 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
-    @task=Task.find(params[:id])
+    @task=Task.friendly.find(params[:id])
     @task.destroy!
  respond_to do |format|
     format.turbo_stream
