@@ -67,7 +67,7 @@ class ListsController < ApplicationController
     end
 
     def set_list
-      @list = @board.lists.find(params[:id])
+      @list = @board.lists.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
