@@ -18,7 +18,7 @@
       data-sortable-list-id="<%= list.id %>"
       class="flex-grow-1 overflow-auto">
     <% list.tasks.rank(:row_order).each do |task| %>
-      <li data-sortable-update-url="<%= sort_task_path(task) %>" class="bg-white border rounded px-2 py-1 mb-2 shadow-sm">
+      <li data-sortable-update-url="<%= sort_task_path(task) %>" class="bg-white border rounded px-2 py-1 mb-2 shadow-sm" id="<%= dom_id(task)%>">
         <%= render task %>
       </li>
     <% end %>

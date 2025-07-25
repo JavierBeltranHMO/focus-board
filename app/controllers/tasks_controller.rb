@@ -63,11 +63,11 @@ class TasksController < ApplicationController
   def destroy
     @task=Task.find(params[:id])
     @task.destroy!
-
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to fallback_location: request.referer }
-    end
+ respond_to do |format|
+    format.turbo_stream
+    format.html { redirect_to authenticated_root_path, notice: "Task deleted." }
+    #   format.html { redirect_to fallback_location: request.referer }
+  end
   end
 
   private
