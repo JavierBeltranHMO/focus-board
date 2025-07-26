@@ -16,8 +16,10 @@ export default class extends Controller {
   }
 
   modal(event) {
+    console.log("hnotello");
     const listSlug = event.currentTarget.dataset.taskListSlugValue;
-    const modalEl = document.getElementById("new-task-modal");
+    // const modalEl = document.getElementById("new-task-modal");
+    const modalEl = this.modalTarget;
     const listIdField = modalEl.querySelector(
       '[data-tasks-target="listIdField"]'
     );
@@ -36,12 +38,24 @@ export default class extends Controller {
     modalEl.querySelector("input[name='_method']")?.remove();
     modalEl.querySelector("#task-errors").classList.add("d-none");
 
+    const idField = modalEl.querySelector('[data-tasks-target="idField"]');
+    if (idField) {
+      idField.disabled = true;
+      idField.value = "";
+    }
+
     const modal = new bootstrap.Modal(modalEl);
     modal.show();
   }
 
+  editModal(event) {
+    const { id, name, description, listId } = event.currentTarget.dataset;
+    // const
+  }
+
   resetModal(event) {
-    const modalEl = document.getElementById("new-task-modal");
+    // const modalEl = document.getElementById("new-task-modal");
+    const modalEl = this.modalTarget;
     if (event.detail.success) {
       bootstrap.Modal.getInstance(modalEl)?.hide();
       modalEl.querySelector("form").reset();
