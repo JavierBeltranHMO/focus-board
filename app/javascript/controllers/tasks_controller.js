@@ -26,6 +26,15 @@ export default class extends Controller {
 
     listIdField.value = listSlug;
     form.action = `/boards/${boardSlug}/lists/${listSlug}/tasks`;
+    form.method = "post";
+
+    modalEl.querySelector("#task-id-field").value = "";
+    modalEl.querySelector("input[name='task[name]']").value = "";
+    modalEl.querySelector("textarea[name='task[description]']").value = "";
+
+    modalEl.querySelector(".modal-title").textContent = "New Task";
+    modalEl.querySelector("input[name='_method']")?.remove();
+    modalEl.querySelector("#task-errors").classList.add("d-none");
 
     const modal = new bootstrap.Modal(modalEl);
     modal.show();

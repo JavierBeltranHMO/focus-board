@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 100 }
+  validates :description, length: { maximum: 500 }, allow_blank: true
+
   belongs_to :list
 
   extend FriendlyId
