@@ -1,3 +1,4 @@
+# app/controllers/tasks_controller.rb
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
@@ -29,6 +30,10 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+     @task = Task.friendly.find(params[:id])
+
+     @list=@task.list
+     @board=@list&.board
   end
 
   # POST /tasks or /tasks.json
@@ -49,15 +54,38 @@ class TasksController < ApplicationController
     end
   end
 
+  # @list=@task.list
+  # @board=@list.board
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    puts "\nBEFORE UPDATE"
+    puts "Task ID: #{@task.id}"
+    puts "List: #{@task.list&.id}"
+    puts "Board: #{@task.list&.board&.id}"
+
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: "Task was successfully updated." }
+        puts "\nAFTER UPDATE (success)"
+        puts "List: #{@task.list&.id}"
+        puts "Board: #{@task.list&.board&.id}"
+
+        format.html { redirect_to board_path(@task.list.board), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        puts "\nAFTER UPDATE (failed)"
+        puts "List: #{@task.list&.id}"
+        puts "Board: #{@task.list&.board&.id}"
+        puts "Errors: #{@task.errors.full_messages}"
+
+        board=@task.list&.board
+        if board.present?
+          flash[:alert]=@task.errors.full_messages.to_sentence
+          redirect_to board_path(@board)
+        else
+          flash[:alert] = "Update failed and task has no associated board"
+          format.html { redirect_to authenticated_root_path }
+        end
+      format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end

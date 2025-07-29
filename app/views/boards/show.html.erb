@@ -22,7 +22,6 @@
           <div class="modal-body">
             <%= f.hidden_field :id, id: "task-id-field", data:{tasks_target:"idField"}, disabled:true %>
             <%= f.hidden_field :list_id, data: { tasks_target: "listIdField" } %>
-            <div id="task-errors" class="alert alert-danger d-none"></div>
             <div class="mb-3">
               <%= f.label :name %>
               <%= f.text_field :name, class: "form-control" %>
@@ -33,7 +32,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <%= f.submit "Create Task", class: "btn btn-primary" %>
+            <%= f.submit "Save Task", class: "btn btn-primary"%>
             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
           </div>
         <% end %>

@@ -16,9 +16,8 @@ export default class extends Controller {
   }
 
   modal(event) {
-    console.log("hnotello");
+    // console.log("hnotello");
     const listSlug = event.currentTarget.dataset.taskListSlugValue;
-    // const modalEl = document.getElementById("new-task-modal");
     const modalEl = this.modalTarget;
     const listIdField = modalEl.querySelector(
       '[data-tasks-target="listIdField"]'
@@ -36,7 +35,6 @@ export default class extends Controller {
 
     modalEl.querySelector(".modal-title").textContent = "New Task";
     modalEl.querySelector("input[name='_method']")?.remove();
-    modalEl.querySelector("#task-errors").classList.add("d-none");
 
     const idField = modalEl.querySelector('[data-tasks-target="idField"]');
     if (idField) {
@@ -49,12 +47,36 @@ export default class extends Controller {
   }
 
   editModal(event) {
+    const modalEl = this.modalTarget;
+    const form = modalEl.querySelector("form");
+
     const { id, name, description, listId } = event.currentTarget.dataset;
-    // const
+
+    modalEl.querySelector("input[name='task[name]']").value = name;
+    modalEl.querySelector("textarea[name='task[description]']").value =
+      description;
+    this.listIdFieldTarget.value = listId;
+    form.action = `/tasks/${id}`;
+    form.method = "post";
+
+    let methodInput = form.querySelector("input[name='_method']");
+    if (!methodInput) {
+      methodInput = document.createElement("input");
+      methodInput.type = "hidden";
+      methodInput.name = "_method";
+      form.appendChild(methodInput);
+    }
+    methodInput.value = "patch";
+
+    modalEl.querySelector(".modal-title").textContent = "Edit Task";
+    this.listIdFieldTarget.disabled = false;
+    this.listIdFieldTarget.value = listId;
+
+    const modal = new bootstrap.Modal(modalEl);
+    modal.show();
   }
 
   resetModal(event) {
-    // const modalEl = document.getElementById("new-task-modal");
     const modalEl = this.modalTarget;
     if (event.detail.success) {
       bootstrap.Modal.getInstance(modalEl)?.hide();

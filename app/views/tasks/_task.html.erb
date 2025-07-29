@@ -1,13 +1,16 @@
 <div class="mb-2" >
   <turbo-frame id="<%= dom_id task%>">
-    <div  class="d-flex justify-content-between align-items-center task-item" data-controller="tasks">
+    <div  class="d-flex justify-content-between align-items-center task-item" >
       <%= form_with url: complete_task_path(task), method: :patch, data:{turbo_stream: true}, class:"m-0 p-0" do %>
         <button class="btn btn-sm btn-outline-success" type="submit">
           <i class="bi bi-check"></i>
         </button>
       <% end %>
       <span class="flex-grow-1 mx-2 task-name <%= "text-decoration-line-through opacity-50" if task.completed? %>">
-        <%= task.name %>
+        <div class="task-edit-trigger" data-action="click->tasks#editModal" data-id="<%= task.id%>" data-name="<%= task.name %>" data-description="<%= task.description %>" data-list-id="<%= task.list_id %>">
+          <strong class="text-primary text-decoration-none"> <%=task.name%> </strong>
+          <%# <small>task.data-description</small> %>
+        </div>
       </span>
       <%= form_with url: task_path(task), method: :delete, data:{turbo_stream: true}, class:"m-0 p-0" do %>
         <button class="btn btn-sm btn-outline-danger" type="submit">

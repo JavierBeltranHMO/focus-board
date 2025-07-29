@@ -1,3 +1,4 @@
+# app/config/routes.rb
 Rails.application.routes.draw do
   devise_for :users
 
@@ -6,7 +7,7 @@ Rails.application.routes.draw do
       member do
         put :sort
       end
-      resources :tasks, only: [ :create ]
+      resources :tasks, except: [ :index, :new ]
     end
   end
 
