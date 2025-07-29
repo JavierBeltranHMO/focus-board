@@ -20,7 +20,15 @@
       data-sortable-list-id="<%= list.id %>"
       class="flex-grow-1 overflow-auto">
     <% list.tasks.rank(:row_order).each do |task| %>
-      <li data-sortable-update-url="<%= sort_task_path(task) %>" class="bg-white border rounded px-2 py-1 mb-2 shadow-sm" id="<%= dom_id(task)%>">
+      <% css_classes= "p-2 rounded shadow-sm"%>
+      <% if task.due_date.present? %>
+        <% if task.due_date < Date.today %>
+          <% css_classes += " bg-danger text-white" %>
+        <% elsif task.due_date == Date.today %>
+          <% css_classes += " bg-warning text-dark" %>
+        <% end %>
+      <% end %>
+      <li data-sortable-update-url="<%= sort_task_path(task) %>" class="<%= css_classes%>  border rounded px-2 py-1 mb-2 shadow-sm" id="<%= dom_id(task)%>">
         <%= render task %>
       </li>
     <% end %>

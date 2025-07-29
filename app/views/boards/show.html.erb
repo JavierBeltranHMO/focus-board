@@ -30,6 +30,10 @@
               <%= f.label :description %>
               <%= f.text_area :description, class: "form-control" %>
             </div>
+            <div class="mb-3">
+              <%= f.label :due_date, "Due DAte" %>
+              <%= f.date_field :due_date, class: "form-control" %>
+            </div>
           </div>
           <div class="modal-footer">
             <%= f.submit "Save Task", class: "btn btn-primary"%>
