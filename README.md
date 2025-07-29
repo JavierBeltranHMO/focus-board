@@ -6,14 +6,11 @@ Focus Board is a full-stack Trello clone built with Ruby on Rails and PostgreSQL
 
 ## ✅ Implemented Features
 
-- Reorderable task lists
+- Reorderable task and lists
 - Drag & drop tasks between lists
+- Deletion confirmations
 
 ---
-
-- Add task descriptions
-- Mark tasks as completed
-- Deletion confirmations
 
 ### 🧑‍💼 Authentication & Accounts
 
@@ -33,16 +30,14 @@ Focus Board is a full-stack Trello clone built with Ruby on Rails and PostgreSQL
 ### 🧠 Boards
 
 - [✔️] Create multiple boards
-- [ ] Share boards with other users (collaboration)
-- [ ] Mark boards as favorites
+- [ ] Share boards with other users
 
 ### ✅ Tasks
 
 - [✔️] Add task descriptions
-- [ ] Set task deadlines
+- [✔️] Set task deadlines
 - [✔️] Mark tasks as completed
-- [ ] Add comments to tasks
-- [ ] Attach files to tasks (via ActiveStorage)
+- [ ] Attach files to tasks
 
 ### 🎨 UI/UX Improvements
 
