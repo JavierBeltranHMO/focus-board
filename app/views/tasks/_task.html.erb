@@ -9,9 +9,20 @@
       <% end %>
       <span class="flex-grow-1 mx-2 task-name <%= "text-decoration-line-through opacity-50" if task.completed? %>">
         <div class="task-edit-trigger " data-action="click->tasks#editModal" data-id="<%= task.id%>" data-name="<%= task.name %>" data-description="<%= task.description %>" data-list-id="<%= task.list_id %>">
-          <strong class="text-primary text-decoration-none"> <%=task.name%> </strong>
+          <strong class="text-primary text-decoration-none"> <%=task.name%> </strong> <br>
           <% if task.due_date.present? %> <br>
             <small class="text-muted">Due: <%= formatted_due_date(task) %> </small>
+          <% end %>
+          <% if task.files.attached? %>
+            <div class="mt-2">
+              <ul class="list-unstyled">
+                <% task.files.each do |file|%>
+                  <li>
+                    <%= link_to file.filename.to_s, url_for(file), target: "_blank", rel:"noopener" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
           <% end %>
         </div>
       </span>

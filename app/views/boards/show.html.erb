@@ -14,7 +14,7 @@
      data-board-slug="<%= @board.slug %>">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <%= form_with model: Task.new, url: "#", scope: :task, data: { turbo_frame: "_top", action: "turbo:submit-end->tasks#resetModal"}, local: true, html:{id: "task-form"} do |f| %>
+        <%= form_with model: Task.new, url: "#", scope: :task, data: { turbo_frame: "_top", action: "turbo:submit-end->tasks#resetModal"}, local: true, html:{multipart: true, id: "task-form"} do |f| %>
           <div class="modal-header">
             <h5 class="modal-title">New Task</h5>
             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -31,8 +31,12 @@
               <%= f.text_area :description, class: "form-control" %>
             </div>
             <div class="mb-3">
-              <%= f.label :due_date, "Due DAte" %>
+              <%= f.label :due_date, "Due Date" %>
               <%= f.date_field :due_date, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :files, "Attachments" %>
+              <%= f.file_field :files, multiple: true, direct_upload: true, class: "form-control" %>
             </div>
           </div>
           <div class="modal-footer">
