@@ -11,12 +11,12 @@
         <div class="task-edit-trigger " data-action="click->tasks#editModal" data-id="<%= task.id%>" data-name="<%= task.name %>" data-description="<%= task.description %>" data-list-id="<%= task.list_id %>">
           <strong class="text-primary text-decoration-none"> <%=task.name%> </strong>
           <% if task.due_date.present? %> <br>
-            <small>Due: <%= task.due_date.strftime{"%b %d, %Y"} %> </small>
+            <small class="text-muted">Due: <%= formatted_due_date(task) %> </small>
           <% end %>
         </div>
       </span>
       <%= form_with url: task_path(task), method: :delete, data:{turbo_stream: true}, class:"m-0 p-0" do %>
-        <button class="btn btn-sm btn-outline-danger" type="submit">
+        <button class="btn btn-sm btn-outline-secondary" type="submit">
           <i class="bi bi-trash"></i>
         </button>
       <% end %>
