@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  rescue_from ActiveRecord::RecordNotFound do
+    render file: Rails.root.join("public/404.html"), status: :not_found, layout: false
+  end
+
   private
 
   def user_not_authorized
