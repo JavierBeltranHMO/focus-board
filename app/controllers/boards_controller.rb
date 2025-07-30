@@ -5,9 +5,11 @@ class BoardsController < ApplicationController
   after_action :verify_authorized, except: [ :index, :new, :create ]
 
   def index
-    owned_boards=Board.where(user: current_user).pluck(:id)
-    shared_boards=Board.joins(:board_memberships).where(board_memberships: { user_id: current_user.id }).pluck(:id)
-    board_ids=(owned_boards+shared_boards).uniq
+    return unless user_signed_in?
+    @owned_boards=Board.where(user: current_user)
+    @shared_boards=Board.joins(:board_memberships).where(board_memberships: { user_id: current_user.id })
+
+    board_ids=(@owned_boards.pluck(:id) + @shared_boards.pluck(:id)).uniq
     @boards=Board.where(id: board_ids)
   end
 
