@@ -63,7 +63,8 @@ class ListsController < ApplicationController
   private
 
     def set_board
-      @board=current_user.boards.friendly.find(params[:board_id])
+      @board=Board.accesible_by(current_user).friendly.find(params[:board_id])
+      authorize @board
     end
 
     def set_list
