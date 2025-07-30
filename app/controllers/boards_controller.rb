@@ -1,14 +1,17 @@
+# app/controllers/boards_controller.rb
 class BoardsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
   before_action :set_board, only: [ :show, :edit, :update, :destroy ]
+  after_action :verify_authorized, except: [ :index, :new, :create ]
 
   def index
     @boards= user_signed_in? ? current_user.boards : []
   end
 
   def show
-    @board= current_user.boards.friendly.find(params[:id])
-    redirect_to boards_path, alert: "Board not found." unless @board
+    authorize @board
+    # @board= current_user.boards.friendly.find(params[:id])
+    # redirect_to boards_path, alert: "Board not found." unless @board
   end
 
   def new
@@ -25,9 +28,11 @@ class BoardsController < ApplicationController
   end
 
   def edit
+    authorize @board
   end
 
   def update
+    authorize @board
     if @board.update(board_params)
       redirect_to @board, notice: "Board updated succesfully."
     else
@@ -36,7 +41,7 @@ class BoardsController < ApplicationController
   end
 
   def destroy
-    puts "we working"
+    authorize @board
     @board.destroy
     redirect_to boards_path, notice: "Board deleted succesfully."
   end
@@ -45,6 +50,7 @@ class BoardsController < ApplicationController
 
   def set_board
     @board=current_user.boards.friendly.find(params[:id])
+    authorize @board
   end
 
   def board_params

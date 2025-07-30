@@ -1,6 +1,6 @@
 class Board < ApplicationRecord
   validates :name, presence: true
-  belongs_to :owner, class_name: "User"
+  belongs_to :user
   has_many :lists, -> { rank(:row_order) }, dependent: :destroy
   has_many :board_memberships
   has_many :collaborators, through: :board_memberships, source: :user

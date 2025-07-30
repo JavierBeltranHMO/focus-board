@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :boards do
+    resources :board_memberships, only: [ :create ]
     resources :lists, except: [ :index, :show ] do
       member do
         put :sort
