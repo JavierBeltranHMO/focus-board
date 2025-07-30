@@ -5,7 +5,10 @@ class BoardsController < ApplicationController
   after_action :verify_authorized, except: [ :index, :new, :create ]
 
   def index
-    @boards= user_signed_in? ? current_user.boards : []
+    owned_boards=Board.where(user: current_user).pluck(:id)
+    shared_boards=Board.joins(:board_memberships).where(board_memberships: { user_id: current_user.id }).pluck(:id)
+    board_ids=(owned_boards+shared_boards).uniq
+    @boards=Board.where(id: board_ids)
   end
 
   def show
@@ -49,7 +52,7 @@ class BoardsController < ApplicationController
   private
 
   def set_board
-    @board=current_user.boards.friendly.find(params[:id])
+    @board=Board.accesible_by(current_user).friendly.find(params[:id])
     authorize @board
   end
 

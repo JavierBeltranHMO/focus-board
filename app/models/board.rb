@@ -17,4 +17,8 @@ class Board < ApplicationRecord
   def should_generate_new_friendly_id?
     name_changed?
   end
+
+  def self.accesible_by(user)
+    left_outer_joins(:board_memberships).where("boards.user_id= :uid OR board_memberships.user_id = :uid", uid: user.id).distinct
+  end
 end
