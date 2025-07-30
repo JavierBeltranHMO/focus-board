@@ -1,59 +1,78 @@
 <%# app/views/boards/show.html.erb %>
-<h1><%= @board.name %></h1>
-<div data-controller="tasks">
-  <div id="lists" class="d-flex gap-3 overflow-auto p-3" data-controller="sortable">
-    <% @board.lists.each do |list| %>
-      <div data-sortable-update-url="<%= sort_board_list_path(@board, list) %>">
-        <%= render list %>
-      </div>
-    <% end %>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="h3 d-flex align-items-center gap-4">
+      <%= @board.name %>
+      <% if @board.user==current_user && @board.board_memberships.any? %>
+        <i class="bi bi-people-fill text-primary" title="Shared with others"></i>
+      <% elsif @board.user != current_user %>
+        <span class="badge bg-secondary">Shared with you</span>
+      <% end %>
+    </h3>
+    <div>
+      <%= link_to "Back to Boards", boards_path, class:"btn btn-secondary ms-2" %>
+      <%= link_to "Edit", edit_board_path(@board), class:"btn btn-warning me-2" %>
+      <%= button_to "Delete", board_path(@board), method: :delete, data:{turbo_confirm:"Are you sure"}, class:"btn btn-danger mt-2 ms-2" %>
+    </div>
   </div>
-  <%# tasks modal %>
-  <div id="new-task-modal" class="modal fade" tabindex="-1" role="dialog"
+  <div data-controller="tasks">
+    <div id="lists" class="d-flex gap-3 overflow-auto p-2 bg-light rounded" data-controller="sortable">
+      <% @board.lists.each do |list| %>
+        <div data-sortable-update-url="<%= sort_board_list_path(@board, list) %>">
+          <%= render list %>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to "New List", new_board_list_path(@board), class: "btn btn-primary mt-3" %>
+    <div class="mt-5">
+      <h5>Share with others</h5>
+      <%= form_with url: board_board_memberships_path(@board), local: true, class:"row g-2" do |f| %>
+        <div class="col-md-6">
+          <%= f.email_field :email, placeholder: "Invite by email", class:"form-control" %>
+        </div>
+        <div class="col-auto">
+          <%= f.submit "Invite", class:"btn btn-primary mt-2" %>
+        </div>
+      <% end %>
+    </div>
+    <%# tasks modal %>
+    <div id="new-task-modal" class="modal fade" tabindex="-1" role="dialog"
      data-tasks-target="modal"
      data-board-slug="<%= @board.slug %>">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <%= form_with model: Task.new, url: "#", scope: :task, data: { turbo_frame: "_top", action: "turbo:submit-end->tasks#resetModal"}, local: true, html:{multipart: true, id: "task-form"} do |f| %>
-          <div class="modal-header">
-            <h5 class="modal-title">New Task</h5>
-            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <%= f.hidden_field :id, id: "task-id-field", data:{tasks_target:"idField"}, disabled:true %>
-            <%= f.hidden_field :list_id, data: { tasks_target: "listIdField" } %>
-            <div class="mb-3">
-              <%= f.label :name %>
-              <%= f.text_field :name, class: "form-control" %>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <%= form_with model: Task.new, url: "#", scope: :task, data: { turbo_frame: "_top", action: "turbo:submit-end->tasks#resetModal"}, local: true, html:{multipart: true, id: "task-form"} do |f| %>
+            <div class="modal-header">
+              <h5 class="modal-title">New Task</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="mb-3">
-              <%= f.label :description %>
-              <%= f.text_area :description, class: "form-control" %>
+            <div class="modal-body">
+              <%= f.hidden_field :id, id: "task-id-field", data:{tasks_target:"idField"}, disabled:true %>
+              <%= f.hidden_field :list_id, data: { tasks_target: "listIdField" } %>
+              <div class="mb-3">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :description %>
+                <%= f.text_area :description, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :due_date, "Due Date" %>
+                <%= f.date_field :due_date, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :files, "Attachments" %>
+                <%= f.file_field :files, multiple: true, direct_upload: true, class: "form-control" %>
+              </div>
             </div>
-            <div class="mb-3">
-              <%= f.label :due_date, "Due Date" %>
-              <%= f.date_field :due_date, class: "form-control" %>
+            <div class="modal-footer">
+              <%= f.submit "Save Task", class: "btn btn-primary"%>
+              <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
             </div>
-            <div class="mb-3">
-              <%= f.label :files, "Attachments" %>
-              <%= f.file_field :files, multiple: true, direct_upload: true, class: "form-control" %>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <%= f.submit "Save Task", class: "btn btn-primary"%>
-            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<%= link_to "New List", new_board_list_path(@board), class: "btn btn-primary mt-3" %>
-<%= link_to "Back to Boards", boards_path, class:"btn btn-secondary ms-2" %>
-<%= link_to "Edit", edit_board_path(@board), class:"btn btn-warning me-2" %>
-<%= button_to "Delete", board_path(@board), method: :delete, data:{turbo_confirm:"Are you sure"}, class:"btn btn-danger mt-2 ms-2" %>
-<%= form_with url: board_board_memberships_path(@board), local: true do |f| %>
-  <%= f.hidden_field :board_id, value: @board.id %>
-  <%= f.email_field :email, placeholder: "Invite by email", class:"form-control" %>
-  <%= f.submit "Invite", class:"btn btn-primary mt-2" %>
-<% end %>
