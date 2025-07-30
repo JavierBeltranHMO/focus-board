@@ -50,6 +50,7 @@ Focus Board is a full-stack Trello clone built with Ruby on Rails and PostgreSQL
 - [ ] Search/filter tasks by name or status
 - [ ] Visual task priority (high/medium/low)
 - [ ] Checklist/subtasks within tasks
+- [ ] Firefox
 
 ---
 
