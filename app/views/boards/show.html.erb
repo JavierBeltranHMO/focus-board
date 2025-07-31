@@ -11,7 +11,7 @@
     </h3>
     <div>
       <%= link_to "Back to Boards", boards_path, class:"btn btn-secondary ms-2" %>
-      <%= link_to "Edit", edit_board_path(@board), class:"btn btn-warning me-2" %>
+      <button class="btn btn-warning ms-2" data-action="click->board-form#edit" data-board='{"id": <%= @board.id %>, "name": "<%= j @board.name %>", "url": "<%= board_path(@board) %>"}'>Change Name</button>
       <%= button_to "Delete", board_path(@board), method: :delete, data:{turbo_confirm:"Are you sure"}, class:"btn btn-danger mt-2 ms-2" %>
     </div>
   </div>
@@ -97,3 +97,4 @@
     </div>
   </div>
 </div>
+<%= render "boards/form_modal"%>

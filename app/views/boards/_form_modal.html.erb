@@ -1,0 +1,20 @@
+<div class="modal fade" id="board-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_with model: Board.new, url:"#", method: :post, data:{turbo_frame: "_top"}, html: {id:"board-form", data:{board_form_target: "form", new_url: boards_path}} do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title" data-board-form-target="title">New Board</h5>
+          <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <%= f.hidden_field :id, id:"board-id-field", data:{board_form_target: "idField"} %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class:"form-control", data: {board_form_target:"nameField"} %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Save", class:"btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

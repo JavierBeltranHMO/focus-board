@@ -3,7 +3,7 @@
   <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h3 class="h3">Your Boards</h3>
-      <%= link_to "New Board", new_board_path, class:"btn btn-primary mb-3" %>
+      <button class="btn btn-primary mb-3" data-action="click->board-form#new">+ New Board</button>
     </div>
     <ul class="list-group mb-4">
       <% @owned_boards.each do |board| %>
@@ -38,3 +38,4 @@
     <%= link_to "register", new_user_registration_path, class:"btn btn-outline-primary" %>
   </div>
 <% end %>
+<%= render "form_modal"%>
