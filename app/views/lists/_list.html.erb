@@ -9,7 +9,9 @@
       <ul class="dropdown-menu dropdown-menu-end"
           aria-labelledby="listMenu<%= list.id %>"
           style="z-index: 2000">
-        <li><%= link_to "Edit", edit_board_list_path(@board, list), class: "dropdown-item" %></li>
+        <li>
+          <button class="dropdown-item" data-action="click->list-form#edit" data-list='{"id":"<%= list.id%>", "name": "<%= j list.name%>", "url": "<%= board_list_path(@board,list) %>"}'>Edit</button>
+        </li>
         <li><%= button_to "Delete", board_list_path(@board, list), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this list?" }, class: "dropdown-item text-danger" %></li>
       </ul>
     </div>
