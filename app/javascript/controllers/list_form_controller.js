@@ -3,7 +3,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["idField", "nameField", "title"];
+  static targets = ["idField", "nameField", "title", "form"];
 
   connect() {
     this.modal = new bootstrap.Modal(document.getElementById("list-modal"));
@@ -11,11 +11,23 @@ export default class extends Controller {
 
   new(event) {
     event.preventDefault();
+
+    this.titleTarget.textContent = "New List";
+    this.idFieldTarget.value = "";
+    this.nameFieldTarget.value = "";
+
+    this.formTarget.action = this.formTarget.dataset.newUrl;
+    this.formTarget.method = "post";
+
+    const modal = bootstrap.Modal.getOrCreateInstance(
+      document.getElementById("list-modal")
+    );
+    this.modal.show();
   }
 
   edit(event) {
     event.preventDefault();
-    console.log("hello");
+
     const data = JSON.parse(event.currentTarget.dataset.list);
 
     this.titleTarget.textContent = "Change Name";
