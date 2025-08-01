@@ -9,7 +9,7 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+# gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
@@ -44,6 +44,7 @@ gem "thruster", require: false
 gem 'ranked-model'
 gem 'requestjs-rails'
 gem 'devise'
+gem "jsbundling-rails"
 gem 'friendly_id', '~> 5.5', '>= 5.5.1'
 gem "pundit", "~> 2.5"
 
