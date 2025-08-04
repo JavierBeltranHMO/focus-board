@@ -8,6 +8,3 @@ yarn install
 
 echo "Building JavaScript assets..."
 yarn build
-
-echo "Precompiling Ruby gems with bootsnap..."
-bundle exec bootsnap precompile --gemfile
