@@ -1,0 +1,8 @@
+
+set -e 
+
+bundle install
+yarn install
+yarn build
+
+bundle exec bootsnap precompile --gemfile
