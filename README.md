@@ -2,6 +2,20 @@
 
 Focus Board is a full-stack Trello clone built with Ruby on Rails and PostgreSQL.
 
+## 🚀 Try It Out
+
+This project includes some pre-generated users you can use to test the app right away.
+
+### 👤 Demo Users
+
+| User | Email             | Password |
+| ---- | ----------------- | -------- |
+| 1    | user1@example.com | password |
+| 2    | user2@example.com | password |
+| 3    | user3@example.com | password |
+
+Once logged in, you'll see shared boards, lists, and tasks already set up for collaboration.
+
 ## Screenshots
 
 1. **Board Demo**:
