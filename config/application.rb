@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module FocusBoard
   class Application < Rails::Application
+    puts "Rails loaded with DB: #{ENV['DATABASE_URL']}"
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 

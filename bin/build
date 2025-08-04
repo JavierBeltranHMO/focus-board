@@ -8,3 +8,6 @@ yarn install
 
 echo "Building JavaScript assets..."
 yarn build
+
+echo "Build finished. Pre-compiled files:"
+ls -lh public/assets || echo " No assets"
