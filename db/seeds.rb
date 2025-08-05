@@ -24,9 +24,9 @@ sharedBoard.collaborators << user2
 sharedBoard.collaborators << user3
 
 # Lists
-todo=board.lists.create!(title: "To Do", row_order: 0)
-doing=board.lists.create!(title: "In Progress", row_order: 1)
-done=board.lists.create!(title: "Done", row_order: 2)
+todo=sharedBoard.lists.create!(title: "To Do", row_order: 0)
+doing=sharedBoard.lists.create!(title: "In Progress", row_order: 1)
+done=sharedBoard.lists.create!(title: "Done", row_order: 2)
 
 
 # Tasks
