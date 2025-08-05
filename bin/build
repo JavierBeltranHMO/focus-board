@@ -1,13 +1,11 @@
 set -e
 
-echo "Installing Ruby gems..."
 bundle install
 
-echo "Installing JavaScript packages..."
 yarn install
 
-echo "Building JavaScript assets..."
 yarn build
 
-echo "Build finished. Pre-compiled files:"
+bundle exec rake assets:precompile
+
 ls -lh public/assets || echo " No assets"
