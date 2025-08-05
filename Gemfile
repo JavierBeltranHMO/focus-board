@@ -10,7 +10,7 @@ gem "jbuilder"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
-gem "solid_cache"
+#gem "solid_cache"
 #gem "solid_queue"
 #gem "solid_cable"
 
