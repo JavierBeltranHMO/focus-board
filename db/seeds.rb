@@ -16,7 +16,7 @@ user3=User.create!(
 )
 
 # Shared Board from user1
-sharedBoard=Board.create!(title: "Demo Project", user: user1)
+sharedBoard=Board.create!(name: "Demo Project", user: user1)
 
 
 # Sharing
@@ -24,12 +24,12 @@ sharedBoard.collaborators << user2
 sharedBoard.collaborators << user3
 
 # Lists
-todo=sharedBoard.lists.create!(title: "To Do", row_order: 0)
-doing=sharedBoard.lists.create!(title: "In Progress", row_order: 1)
-done=sharedBoard.lists.create!(title: "Done", row_order: 2)
+todo=sharedBoard.lists.create!(name: "To Do", row_order: 0)
+doing=sharedBoard.lists.create!(name: "In Progress", row_order: 1)
+done=sharedBoard.lists.create!(name: "Done", row_order: 2)
 
 
 # Tasks
-todo.tasks.create!(title: "Setup project", description: "Create repo and set up Rails", row_order: 0)
-doing.tasks.create!(title: "Design databse", description: "Define models and relations", row_order: 1)
-done.tasks.create!(title: "Deploy to Render", description: "First production deploy", row_order: 2)
+todo.tasks.create!(name: "Setup project", description: "Create repo and set up Rails", row_order: 0)
+doing.tasks.create!(name: "Design databse", description: "Define models and relations", row_order: 1)
+done.tasks.create!(name: "Deploy to Render", description: "First production deploy", row_order: 2)
