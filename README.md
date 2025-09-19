@@ -133,13 +133,13 @@ Open http://localhost:3000
 ### Screenshots
 
 1. **Create Task**:
-   [![Create Task][create-task]]
+   ![Create Task][create-task]
 2. **Move Task**:
-   [![Move Task][move-task]]
+   ![Move Task][move-task]
 3. **Edit Task**:
-   [![Edit Task][edit-task]]
+   ![Edit Task][edit-task]
 4. **Demo**:
-   [![Demo][demo]]
+   ![Demo][demo]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -206,7 +206,7 @@ Distributed under the Unlicense License.
 [Render-url]: https://render.com/
 [//]: # "Images"
 [create-task]: app/assets/images/create-task.png
-[dashboard]: app/assets/images/dashboard.png
+[dashboard]: app/assets/images/Dashboard.png
 [demo]: app/assets/images/demo.png
 [edit-task]: app/assets/images/edit-task.png
 [move-task]: app/assets/images/move-task.gif
