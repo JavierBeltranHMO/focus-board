@@ -179,7 +179,7 @@ Open http://localhost:3000
 
 Javier Beltran - [LinkedIn](https://www.linkedin.com/in/javier-alejandro-beltran-montiel-3172222b1/)
 
-Project Link: [https://gitlab.com/javier.beltran.hmo/blog-platform](https://gitlab.com/javier.beltran.hmo/blog-platform)
+Project Link: [https://gitlab.com/javier.beltran.hmo/focus-board](https://gitlab.com/javier.beltran.hmo/focus-board)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
