@@ -133,12 +133,19 @@ Open http://localhost:3000
 ### Screenshots
 
 1. **Create Task**:
+
    ![Create Task][create-task]
+
 2. **Move Task**:
+
    ![Move Task][move-task]
+
 3. **Edit Task**:
+
    ![Edit Task][edit-task]
+
 4. **Demo**:
+
    ![Demo][demo]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
