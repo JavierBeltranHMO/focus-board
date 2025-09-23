@@ -31,17 +31,17 @@ Github
             <li><a href="#built-with">Built With</a></li>
          </ul>
       </li>
-      <li><a href="#installation">Instalation</a></li>
+      <li><a href="#installation">Installation</a></li>
       <li><a href="#features-implemented">Features Implemented</a></li>
       <li><a href="#roadmap">Roadmap</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#licence">License</a></li>
+      <li><a href="#license">License</a></li>
    </ol>
  </details>
 
 <!-- DEMO -->
 
-## Demo 🚀
+## Demo
 
 🔗 [Live Demo](https://focus-board.onrender.com)
 
