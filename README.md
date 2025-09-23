@@ -9,7 +9,7 @@ Github
 <br>
 <div align="center">
    <!-- TODO -->
-   <a href="#"><img src="#" alt="logo" width="80" height="80"></a>
+   <a href="https://focus-board.onrender.com"><img src="./app/assets/images/logo.png" alt="logo" width="80" height="80"></a>
 
    <h3 align="center">Focus Board</h3>
 
