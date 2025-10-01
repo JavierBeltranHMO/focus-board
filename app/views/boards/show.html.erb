@@ -19,7 +19,7 @@
     <div id="lists" class="d-flex gap-3 overflow-auto p-2 bg-light rounded" data-controller="sortable">
       <% @board.lists.each do |list| %>
         <div data-sortable-update-url="<%= sort_board_list_path(@board, list) %>">
-          <%= render list %>
+          <%= render partial: "lists/list", locals: { list: list } %>
         </div>
       <% end %>
     </div>
