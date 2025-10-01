@@ -3,7 +3,7 @@
 <div id="lists" class="d-flex gap-3 overflow-auto p-3" data-controller="sortable">
   <% @lists.each do |list| %>
     <div data-sortable-update-url="<%= sort_list_path(list) %>">
-      <%= render list %>
+      <%= render @list %>
     </div>
   <% end %>
 </div>

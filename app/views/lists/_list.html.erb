@@ -31,7 +31,7 @@
         <% end %>
       <% end %>
       <li data-sortable-update-url="<%= sort_task_path(task) %>" class="<%= css_classes%>  border rounded px-2 py-1 mb-2 shadow-sm" id="<%= dom_id(task)%>">
-        <%= render task %>
+        <%= render partial: "tasks/task", locals: { task: task } %>
       </li>
     <% end %>
   </ul>
