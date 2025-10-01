@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <%= link_to "Focus Board", user_signed_in? ? boards_path : new_user_session_path, class:"navbar-brand text-white"  do%>
-      <%= image_tag "cover.png", alt: "ThreadHub", height: "40", width: "auto" %>
+    <%= link_to (user_signed_in? ? boards_path : new_user_session_path), class: "navbar-brand text-white" do %>
+      <%= image_tag "cover.png", alt: "Focus Board", height: "40" %>
+      Focus Board
     <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
